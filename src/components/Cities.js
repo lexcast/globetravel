@@ -7,7 +7,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const Cities = ({ cities, onRemove }) => {
   return (
     <>
-      <span className="text-xs font-medium mb-1">
+      <span className="text-xs font-medium mb-1 mt-2">
         CITIES <span className="text-gray-400">({cities.length})</span>
       </span>
       <div className="max-h-24 bg-gray-800 rounded-lg overflow-y-auto">

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Globe from "./Globe";
 import Search from "./Search";
 import Travel from "./Travel";
+import Travels from "./Travels";
 import Cities from "./Cities";
 import Countries from "./Countries";
 import pick from "object.pick";
@@ -18,6 +19,7 @@ const CITY_FIELDS = [
 const App = () => {
   const [form, setForm] = useState();
   const [cities, setCities] = useState([]);
+  const [travels, setTravels] = useState([]);
   const [countries, setCountries] = useState([]);
 
   const removeCity = (id) => {
@@ -33,12 +35,24 @@ const App = () => {
     }
   };
 
-  const addTravel = (t) => {
-    // const city = pick(c, CITY_FIELDS);
-    // setCities([...cities, city]);
-    // if (!countries.includes(city.countryCode)) {
-    //   setCountries([...countries, city.countryCode]);
-    // }
+  const removeTravel = (id) => {
+    setTravels(travels.filter((t) => id !== t.id));
+  };
+
+  const addTravel = (type, s, e) => {
+    const start = pick(s, CITY_FIELDS);
+    const end = pick(e, CITY_FIELDS);
+    const id = s.geonameId + "_" + e.geonameId;
+
+    setTravels([...travels, { type, start, end, id }]);
+
+    if (!countries.includes(s.countryCode)) {
+      setCountries([...countries, s.countryCode]);
+    }
+
+    if (!countries.includes(e.countryCode)) {
+      setCountries([...countries, e.countryCode]);
+    }
   };
 
   return (
@@ -61,10 +75,13 @@ const App = () => {
               Add Travel
             </button>
           </div>
-          {form === "city" && <Search onSelect={(c) => addCity(c)} />}
-          {form === "travel" && <Travel onFinish={(t) => addTravel(t)} />}
+          {form === "city" && <Search onSelect={addCity} />}
+          {form === "travel" && <Travel onFinish={addTravel} />}
         </div>
         {cities.length > 0 && <Cities cities={cities} onRemove={removeCity} />}
+        {travels.length > 0 && (
+          <Travels travels={travels} onRemove={removeTravel} />
+        )}
       </div>
     </div>
   );
