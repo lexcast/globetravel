@@ -31,7 +31,7 @@ const Search = ({ onSelect }) => {
   }, [search]);
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center relative">
       <DebounceInput
         inputRef={el}
         minLength={2}
@@ -42,7 +42,7 @@ const Search = ({ onSelect }) => {
         onChange={(e) => setSearch(e.target.value)}
       />
       {Array.isArray(results) && results.length > 0 && (
-        <div className="mt-4 rounded-lg bg-gray-800 overflow-hidden text-sm">
+        <div className="top-10 ring left-0 right-0 absolute mt-4 rounded-lg bg-gray-800 overflow-hidden text-sm">
           {results.map((r) => (
             <div
               onClick={() => {
