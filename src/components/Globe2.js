@@ -4,51 +4,51 @@ import { geoInterpolate } from "d3";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 const CITIES = [
-  { lat: "23.062283", long: "-109.699951" },
-  { lat: "25.566699", long: "-108.467305" },
-  { lat: "22.890533", long: "-109.916740" },
-  { lat: "24.13811", long: "-110.30973" },
-  { lat: "24.13811", long: "-110.30973" },
-  { lat: "19.432608", long: "-99.133209" },
-  { lat: "20.66682", long: "-103.39182" },
-  { lat: "32.522499", long: "-117.046623" },
+  { lat: "23.062283", lng: "-109.699951" },
+  { lat: "25.566699", lng: "-108.467305" },
+  { lat: "22.890533", lng: "-109.916740" },
+  { lat: "24.13811", lng: "-110.30973" },
+  { lat: "24.13811", lng: "-110.30973" },
+  { lat: "19.432608", lng: "-99.133209" },
+  { lat: "20.66682", lng: "-103.39182" },
+  { lat: "32.522499", lng: "-117.046623" },
 ];
 
 const FLIGHTS = [
   {
-    start: { lat: "23.062283", long: "-109.699951" },
-    end: { lat: "32.522499", long: "-117.046623" },
+    start: { lat: "23.062283", lng: "-109.699951" },
+    end: { lat: "32.522499", lng: "-117.046623" },
   },
   {
-    start: { lat: "5", long: "109.699951" },
-    end: { lat: "-32.522499", long: "-117.046623" },
+    start: { lat: "5", lng: "109.699951" },
+    end: { lat: "-32.522499", lng: "-117.046623" },
   },
 ];
 
 const RAILS = [
   {
-    start: { lat: "20.062283", long: "-19.699951" },
-    end: { lat: "30.522499", long: "-17.046623" },
+    start: { lat: "20.062283", lng: "-19.699951" },
+    end: { lat: "30.522499", lng: "-17.046623" },
   },
 ];
 
 const SAILS = [
   {
-    start: { lat: "10.062283", long: "-119.699951" },
-    end: { lat: "10.522499", long: "-171.046623" },
+    start: { lat: "10.062283", lng: "-119.699951" },
+    end: { lat: "10.522499", lng: "-171.046623" },
   },
 ];
 
 const addPath = (start, end, radius, color, scene) => {
   // Convert latitude/longitude to XYZ on the globe
-  const startXYZ = toVector(start.lat, start.long, radius + 0.3);
-  const endXYZ = toVector(end.lat, end.long, radius + 0.3);
+  const startXYZ = toVector(start.lat, start.lng, radius + 0.3);
+  const endXYZ = toVector(end.lat, end.lng, radius + 0.3);
 
   // D3 interpolates along the great arc that passes
   // through both the start and end point
   const d3Interpolate = geoInterpolate(
-    [start.long, start.lat],
-    [end.long, end.lat]
+    [start.lng, start.lat],
+    [end.lng, end.lat]
   );
   const control1 = d3Interpolate(0.25);
   const control2 = d3Interpolate(0.5);
@@ -87,14 +87,14 @@ const addPath = (start, end, radius, color, scene) => {
 
 const addCurve = (start, end, radius, scene) => {
   // Convert latitude/longitude to XYZ on the globe
-  const startXYZ = toVector(start.lat, start.long, radius);
-  const endXYZ = toVector(end.lat, end.long, radius);
+  const startXYZ = toVector(start.lat, start.lng, radius);
+  const endXYZ = toVector(end.lat, end.lng, radius);
 
   // D3 interpolates along the great arc that passes
   // through both the start and end point
   const d3Interpolate = geoInterpolate(
-    [start.long, start.lat],
-    [end.long, end.lat]
+    [start.lng, start.lat],
+    [end.lng, end.lat]
   );
   const control1 = d3Interpolate(0.25);
   const control2 = d3Interpolate(0.75);
@@ -220,10 +220,10 @@ const Globe = () => {
       for (let lat = -90; lat <= 90; lat += 180 / r) {
         const t = Math.cos(Math.abs(lat) * D2R) * 25 * Math.PI * 2 * 2;
         for (let r = 0; r < t; r++) {
-          const long = (360 * r) / t - 180;
-          if (!visibilityForCoordinate(long, lat, imageData)) continue;
+          const lng = (360 * r) / t - 180;
+          if (!visibilityForCoordinate(lng, lat, imageData)) continue;
 
-          const c = polar2Cartesian(lat, long, radius);
+          const c = polar2Cartesian(lat, lng, radius);
           vertices.push(c.x, c.y, c.z);
         }
       }
@@ -244,8 +244,8 @@ const Globe = () => {
 
       const citiesVertices = [];
       CITIES.forEach((city) => {
-        const cl = polar2Cartesian(city.lat, city.long, radius);
-        const ch = polar2Cartesian(city.lat, city.long, radius + 5);
+        const cl = polar2Cartesian(city.lat, city.lng, radius);
+        const ch = polar2Cartesian(city.lat, city.lng, radius + 5);
         citiesVertices.push(cl.x, cl.y, cl.z);
         citiesVertices.push(ch.x, ch.y, ch.z);
       });

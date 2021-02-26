@@ -57,7 +57,9 @@ const App = () => {
 
   return (
     <div className="text-gray-300 w-screen h-screen bg-gray-900 flex overflow-hidden flex-no-wrap">
-      <Globe />
+      <div className="h-screen w-2/3 bg-gray-900">
+        <Globe cities={cities} travels={travels} />
+      </div>
       <div className="flex-1 flex flex-col flex-nowrap px-10 py-16 h-screen overflow-y-auto">
         {countries.length > 0 && <Countries countries={countries} />}
         <div className="flex-1">

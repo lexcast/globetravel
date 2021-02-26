@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import Search from "./Search";
 import emoji from "react-easy-emoji";
 import { countryCodeEmoji } from "country-code-emoji";
