@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { DebounceInput } from "react-debounce-input";
-import emoji from "react-easy-emoji";
-import { countryCodeEmoji } from "country-code-emoji";
+import emoji from "utils/emoji";
 
 const Search = ({ onSelect }) => {
   const [search, setSearch] = useState("");
@@ -55,9 +54,7 @@ const Search = ({ onSelect }) => {
               className="cursor-pointer px-3 py-2 flex items-center hover:bg-gray-700"
             >
               {r.countryCode && (
-                <span className="mr-2">
-                  {emoji(countryCodeEmoji(r.countryCode))}
-                </span>
+                <span className="mr-2">{emoji(r.countryCode)}</span>
               )}
               <span className="flex-1">{r.name}</span>
               {r.adminName1 && (

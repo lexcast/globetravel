@@ -1,6 +1,5 @@
 import React from "react";
-import emoji from "react-easy-emoji";
-import { countryCodeEmoji } from "country-code-emoji";
+import emoji from "utils/emoji";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -18,9 +17,7 @@ const Cities = ({ cities, onRemove }) => {
             className="group cursor-pointer px-3 py-1 flex items-center hover:bg-gray-700"
           >
             {c.countryCode && (
-              <span className="mr-2">
-                {emoji(countryCodeEmoji(c.countryCode))}
-              </span>
+              <span className="mr-2">{emoji(c.countryCode)}</span>
             )}
             <span className="flex-1">{c.name}</span>
             <span className="group-hover:visible invisible text-xs">
