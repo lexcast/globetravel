@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useLocalStorage from "hooks/useLocalStorage";
 import Globe from "./Globe";
 import Search from "./Search";
 import Travel from "./Travel";
@@ -18,9 +19,12 @@ const CITY_FIELDS = [
 
 const App = () => {
   const [form, setForm] = useState();
-  const [cities, setCities] = useState([]);
-  const [travels, setTravels] = useState([]);
-  const [countries, setCountries] = useState([]);
+  const [cities, setCities] = useLocalStorage("@globetravel.cities", []);
+  const [travels, setTravels] = useLocalStorage("@globetravel.travels", []);
+  const [countries, setCountries] = useLocalStorage(
+    "@globetravel.countries",
+    []
+  );
 
   const removeCity = (id) => {
     setCities(cities.filter((c) => id !== c.geonameId));
