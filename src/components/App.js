@@ -47,11 +47,11 @@ const App = () => {
     setTravels([...travels, { type, start, end, id }]);
 
     if (!countries.includes(s.countryCode)) {
-      setCountries([...countries, s.countryCode]);
+      setCountries((c) => [...c, s.countryCode]);
     }
 
     if (!countries.includes(e.countryCode)) {
-      setCountries([...countries, e.countryCode]);
+      setCountries((c) => [...c, e.countryCode]);
     }
   };
 
