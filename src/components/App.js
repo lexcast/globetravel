@@ -6,6 +6,8 @@ import Travel from "./Travel";
 import Travels from "./Travels";
 import Cities from "./Cities";
 import Countries from "./Countries";
+import Export from "./Export";
+import Import from "./Import";
 import pick from "object.pick";
 
 const CITY_FIELDS = [
@@ -64,7 +66,7 @@ const App = () => {
       <div className="h-screen w-2/3 bg-gray-900">
         <Globe cities={cities} travels={travels} />
       </div>
-      <div className="flex-1 flex flex-col flex-nowrap px-10 py-16 h-screen overflow-y-auto">
+      <div className="flex-1 flex flex-col flex-nowrap px-10 pt-14 pb-4 h-screen overflow-y-auto">
         {countries.length > 0 && <Countries countries={countries} />}
         <div className="flex-1">
           <div className="flex justify-around mb-8">
@@ -88,6 +90,10 @@ const App = () => {
         {travels.length > 0 && (
           <Travels travels={travels} onRemove={removeTravel} />
         )}
+        <div className="mt-6 flex items-center justify-end gap-4">
+          <Import {...{ setCities, setTravels, setCountries }} />
+          <Export {...{ cities, travels, countries }} />
+        </div>
       </div>
     </div>
   );
