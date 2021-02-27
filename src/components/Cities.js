@@ -13,7 +13,7 @@ const Cities = ({ cities, onRemove }) => {
         {cities.map((c) => (
           <div
             key={c.geonameId}
-            className="group px-3 py-1 flex items-center hover:bg-gray-700"
+            className="group px-3 py-2 flex items-center hover:bg-gray-700"
           >
             {c.countryCode && (
               <span className="mr-2 flex-shrink-0">{emoji(c.countryCode)}</span>
