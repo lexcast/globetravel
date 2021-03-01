@@ -9,7 +9,7 @@ import Curve from "./Curve";
 
 const Globe = ({ cities, travels }) => {
   return (
-    <Canvas camera={{ position: [0, 0, 200] }}>
+    <Canvas orthographic camera={{ position: [0, 0, 200] }}>
       <Earth />
       <Land />
       {cities.map((city) => (
