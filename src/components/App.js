@@ -28,8 +28,24 @@ const App = () => {
     []
   );
 
-  const removeCity = (id) => {
-    setCities(cities.filter((c) => id !== c.geonameId));
+  const hasCountry = (countryCode, cs, ts) => {
+    return (
+      cs.some((c) => c.countryCode === countryCode) ||
+      ts.some(
+        (t) =>
+          t.start.countryCode === countryCode ||
+          t.end.countryCode === countryCode
+      )
+    );
+  };
+
+  const removeCity = ({ geonameId, countryCode }) => {
+    const newCities = cities.filter((c) => geonameId !== c.geonameId);
+    setCities(newCities);
+
+    if (!hasCountry(countryCode, newCities, travels)) {
+      setCountries(countries.filter((c) => c !== countryCode));
+    }
   };
 
   const addCity = (c) => {
@@ -41,8 +57,17 @@ const App = () => {
     }
   };
 
-  const removeTravel = (id) => {
-    setTravels(travels.filter((t) => id !== t.id));
+  const removeTravel = ({ id, start, end }) => {
+    const newTravels = travels.filter((t) => id !== t.id);
+    setTravels(newTravels);
+
+    if (!hasCountry(start.countryCode, cities, newTravels)) {
+      setCountries((cs) => cs.filter((c) => c !== start.countryCode));
+    }
+
+    if (!hasCountry(end.countryCode, cities, newTravels)) {
+      setCountries((cs) => cs.filter((c) => c !== end.countryCode));
+    }
   };
 
   const addTravel = (type, s, e) => {

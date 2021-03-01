@@ -20,7 +20,7 @@ const Cities = ({ cities, onRemove }) => {
             )}
             <span className="flex-1">{c.name}</span>
             <span
-              onClick={() => onRemove(c.geonameId)}
+              onClick={() => onRemove(c)}
               className="cursor-pointer group-hover:visible invisible text-xs"
             >
               <FontAwesomeIcon icon={faTimes} />

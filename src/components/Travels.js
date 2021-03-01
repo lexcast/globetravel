@@ -46,7 +46,7 @@ const Travels = ({ travels, onRemove }) => {
               ))}
             </div>
             <span
-              onClick={() => onRemove(t.id)}
+              onClick={() => onRemove(t)}
               className="group-hover:visible invisible text-xs"
             >
               <FontAwesomeIcon icon={faTimes} />
