@@ -45,7 +45,7 @@ const Land = () => {
           />
         )}
       </bufferGeometry>
-      <pointsMaterial size={0.8} color="#C7D2FE" />
+      <pointsMaterial size={1.5} color="#C7D2FE" />
     </points>
   );
 };
