@@ -44,6 +44,11 @@ const toVector = (lat, lng, rad, relAltitude = 0) => {
   return new Vector3(c.x, c.y, c.z);
 };
 
+const date = new Date();
+const timeZoneOffset = date.getTimezoneOffset() || 0;
+const timeZoneMaxOffset = 60 * 12;
+const ROTATION = [0, Math.PI * (timeZoneOffset / timeZoneMaxOffset), 0];
+
 export {
   RADIUS,
   visibilityForCoordinate,
@@ -51,4 +56,5 @@ export {
   loadMap,
   polar2Cartesian,
   toVector,
+  ROTATION,
 };

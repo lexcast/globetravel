@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { CatmullRomCurve3 } from "three";
-import { RADIUS, toVector } from "utils/globe";
+import { RADIUS, toVector, ROTATION } from "utils/globe";
 import { geoInterpolate } from "d3";
 
 const Path = ({ travel }) => {
@@ -28,7 +28,7 @@ const Path = ({ travel }) => {
   }, [travel]);
 
   return (
-    <mesh>
+    <mesh rotation={ROTATION}>
       <tubeBufferGeometry args={[curve, 44, 0.3, 8]} />
       <meshBasicMaterial
         color={travel.type === "trail" ? "#10B981" : "#3B82F6"}

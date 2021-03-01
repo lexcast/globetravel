@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { CatmullRomCurve3 } from "three";
-import { polar2Cartesian, RADIUS, toVector } from "utils/globe";
+import { polar2Cartesian, RADIUS, toVector, ROTATION } from "utils/globe";
 
 const Marker = ({ city }) => {
   const { lat, lng } = city;
@@ -19,7 +19,7 @@ const Marker = ({ city }) => {
   }, [lat, lng]);
 
   return (
-    <>
+    <mesh rotation={ROTATION}>
       <mesh>
         <tubeBufferGeometry args={[curve, 44, 0.3, 8]} />
         <meshBasicMaterial color="#FCD34D" />
@@ -28,7 +28,7 @@ const Marker = ({ city }) => {
         <sphereBufferGeometry args={[0.3, 5, 5]} />
         <meshBasicMaterial color="#FCD34D" />
       </mesh>
-    </>
+    </mesh>
   );
 };
 

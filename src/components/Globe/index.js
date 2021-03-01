@@ -8,8 +8,13 @@ import Path from "./Path";
 import Curve from "./Curve";
 
 const Globe = ({ cities, travels }) => {
+  const date = new Date();
+  const timeZoneOffset = date.getTimezoneOffset() || 0;
+  const timeZoneMaxOffset = 60 * 12;
+  const rotation = [0, Math.PI * (timeZoneOffset / timeZoneMaxOffset), 0];
+
   return (
-    <Canvas orthographic camera={{ position: [0, 0, 200], zoom:3 }}>
+    <Canvas orthographic camera={{ position: [0, 0, 200], zoom: 3 }}>
       <Earth />
       <Land />
       {cities.map((city) => (
