@@ -16,7 +16,10 @@ const Import = ({ setCities, setTravels, setCountries }) => {
   };
 
   return (
-    <label className="flex items-center justify-center focus:outline-none focus:ring w-8 h-8 rounded bg-gray-800 hover:bg-gray-700">
+    <label
+      title="Import"
+      className="cursor-pointer flex items-center justify-center focus:outline-none focus:ring w-8 h-8 rounded bg-gray-800 hover:bg-gray-700"
+    >
       <input
         className="hidden"
         type="file"

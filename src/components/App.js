@@ -8,6 +8,7 @@ import Cities from "./Cities";
 import Countries from "./Countries";
 import Export from "./Export";
 import Import from "./Import";
+import Reset from "./Reset";
 import pick from "object.pick";
 
 const CITY_FIELDS = [
@@ -116,6 +117,7 @@ const App = () => {
           <Travels travels={travels} onRemove={removeTravel} />
         )}
         <div className="mt-6 flex items-center justify-end gap-4">
+          <Reset {...{ setCities, setTravels, setCountries }} />
           <Import {...{ setCities, setTravels, setCountries }} />
           <Export {...{ cities, travels, countries }} />
         </div>
