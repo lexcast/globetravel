@@ -9,6 +9,7 @@ import Countries from "./Countries";
 import Export from "./Export";
 import Import from "./Import";
 import Reset from "./Reset";
+import Footer from "./Footer";
 import pick from "object.pick";
 
 const CITY_FIELDS = [
@@ -121,6 +122,7 @@ const App = () => {
           <Import {...{ setCities, setTravels, setCountries }} />
           <Export {...{ cities, travels, countries }} />
         </div>
+        <Footer />
       </div>
     </div>
   );
