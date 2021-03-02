@@ -25,7 +25,7 @@ const loadMap = () =>
     const img = new Image();
     img.addEventListener("load", () => resolve(img));
     img.addEventListener("error", (err) => reject(err));
-    img.src = "images/map.png";
+    img.src = `${process.env.PUBLIC_URL}/images/map.png`;
   });
 
 const polar2Cartesian = (lat, lng, rad = RADIUS, relAltitude = 0) => {

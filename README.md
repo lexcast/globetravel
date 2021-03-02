@@ -1,6 +1,7 @@
-# CRA-Tailwindcss
+# Globetravel
+![CI DEPLOY](https://github.com/lexcast/globetravel/workflows/CI%20DEPLOY/badge.svg)
 
-This is a base project to add [Tailwindcss](https://tailwindcss.com/) to a [Create React App](https://github.com/facebook/create-react-app).
+See in action [here](https://lexcast.github.io/globetravel/).
 
 ## Install
 
@@ -8,12 +9,5 @@ Just clone it or download the repository, and run `yarn install`.
 
 ## Available Scripts
 
-This project is basically a Create React App, and it has all of its scripts, plus two to run tailwindcss:
+This project is a Create React App, and it has all of its scripts.
 
-### `yarn start:tw`
-
-Runs tailwindcss in the development mode.
-
-### `yarn build:tw`
-
-Runs tailwindcss in the production mode.<br />
