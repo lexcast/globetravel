@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { DebounceInput } from "react-debounce-input";
-import emoji from "utils/emoji";
+import emoji, { SPECIAL_CODES } from "utils/emoji";
 
 const Search = ({ onSelect }) => {
   const [search, setSearch] = useState("");
@@ -16,7 +16,13 @@ const Search = ({ onSelect }) => {
         const response = await axios.get("http://api.geonames.org/search", {
           params: { username: "lexcast", maxRows: 5, q: search, type: "json" },
         });
-        setResults(response.data.geonames);
+        setResults(
+          response.data.geonames.map((r) =>
+            r.countryCode === "GB" && SPECIAL_CODES.includes(r.adminCode1)
+              ? { ...r, countryCode: r.adminCode1 }
+              : r
+          )
+        );
       } catch (e) {
         setResults([]);
         console.error(e);
