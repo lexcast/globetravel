@@ -13,7 +13,7 @@ const Search = ({ onSelect }) => {
   useEffect(() => {
     const fetchApi = async () => {
       try {
-        const response = await axios.get("http://api.geonames.org/search", {
+        const response = await axios.get("https://secure.geonames.org/search", {
           params: { username: "lexcast", maxRows: 5, q: search, type: "json" },
         });
         setResults(
