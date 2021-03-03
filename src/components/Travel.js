@@ -3,9 +3,14 @@ import Search from "./Search";
 import emoji from "react-easy-emoji";
 import { countryCodeEmoji } from "country-code-emoji";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShip, faPlane, faTrain } from "@fortawesome/free-solid-svg-icons";
+import {
+  faShip,
+  faPlane,
+  faTrain,
+  faBus,
+} from "@fortawesome/free-solid-svg-icons";
 
-const TYPES = { flight: faPlane, trail: faTrain, sail: faShip };
+const TYPES = { flight: faPlane, trail: faTrain, sail: faShip, bus: faBus };
 
 const Travel = ({ onFinish }) => {
   const [type, setType] = useState();
