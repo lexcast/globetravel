@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Search from "./Search";
-import emoji from "react-easy-emoji";
-import { countryCodeEmoji } from "country-code-emoji";
+import emoji from "utils/emoji";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShip,
@@ -50,9 +49,7 @@ const Travel = ({ onFinish }) => {
             </div>
             <div className="flex items-center mr-2">
               {start.countryCode && (
-                <span className="mr-2">
-                  {emoji(countryCodeEmoji(start.countryCode))}
-                </span>
+                <span className="mr-2">{emoji(start.countryCode)}</span>
               )}
               <span>{start.name}</span>
             </div>
