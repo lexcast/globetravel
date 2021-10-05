@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/globetravel/static/css/main.5edd1ea5.chunk.css",
-    "main.js": "/globetravel/static/js/main.850eafeb.chunk.js",
-    "main.js.map": "/globetravel/static/js/main.850eafeb.chunk.js.map",
+    "main.js": "/globetravel/static/js/main.a9fbe47f.chunk.js",
+    "main.js.map": "/globetravel/static/js/main.a9fbe47f.chunk.js.map",
     "runtime-main.js": "/globetravel/static/js/runtime-main.b9f7663a.js",
     "runtime-main.js.map": "/globetravel/static/js/runtime-main.b9f7663a.js.map",
-    "static/js/2.cccc0a6f.chunk.js": "/globetravel/static/js/2.cccc0a6f.chunk.js",
-    "static/js/2.cccc0a6f.chunk.js.map": "/globetravel/static/js/2.cccc0a6f.chunk.js.map",
+    "static/js/2.7cc64101.chunk.js": "/globetravel/static/js/2.7cc64101.chunk.js",
+    "static/js/2.7cc64101.chunk.js.map": "/globetravel/static/js/2.7cc64101.chunk.js.map",
     "index.html": "/globetravel/index.html",
     "static/css/main.5edd1ea5.chunk.css.map": "/globetravel/static/css/main.5edd1ea5.chunk.css.map",
-    "static/js/2.cccc0a6f.chunk.js.LICENSE.txt": "/globetravel/static/js/2.cccc0a6f.chunk.js.LICENSE.txt"
+    "static/js/2.7cc64101.chunk.js.LICENSE.txt": "/globetravel/static/js/2.7cc64101.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b9f7663a.js",
-    "static/js/2.cccc0a6f.chunk.js",
+    "static/js/2.7cc64101.chunk.js",
     "static/css/main.5edd1ea5.chunk.css",
-    "static/js/main.850eafeb.chunk.js"
+    "static/js/main.a9fbe47f.chunk.js"
   ]
 }
