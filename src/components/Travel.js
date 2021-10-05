@@ -7,9 +7,16 @@ import {
   faPlane,
   faTrain,
   faBus,
+  faCar,
 } from "@fortawesome/free-solid-svg-icons";
 
-const TYPES = { flight: faPlane, trail: faTrain, sail: faShip, bus: faBus };
+const TYPES = {
+  flight: faPlane,
+  trail: faTrain,
+  sail: faShip,
+  bus: faBus,
+  car: faCar,
+};
 
 const Travel = ({ onFinish }) => {
   const [type, setType] = useState();

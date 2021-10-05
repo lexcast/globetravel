@@ -7,10 +7,17 @@ import {
   faTrain,
   faShip,
   faBus,
+  faCar,
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-const TYPES = { flight: faPlane, trail: faTrain, sail: faShip, bus: faBus };
+const TYPES = {
+  flight: faPlane,
+  trail: faTrain,
+  sail: faShip,
+  bus: faBus,
+  car: faCar,
+};
 
 const Travels = ({ travels, onRemove }) => {
   return (
