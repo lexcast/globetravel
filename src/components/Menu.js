@@ -28,6 +28,12 @@ const Menu = ({
   setTravels,
   countries,
   setCountries,
+  hideTravels,
+  setHideTravels,
+  hideCities,
+  setHideCities,
+  hideFlights,
+  setHideFlights,
 }) => {
   const [form, setForm] = useState();
   const [show, setShow] = useState(false);
@@ -123,9 +129,23 @@ const Menu = ({
           {form === "city" && <Search onSelect={addCity} />}
           {form === "travel" && <Travel onFinish={addTravel} />}
         </div>
-        {cities.length > 0 && <Cities cities={cities} onRemove={removeCity} />}
+        {cities.length > 0 && (
+          <Cities
+            cities={cities}
+            onRemove={removeCity}
+            hide={hideCities}
+            setHide={setHideCities}
+          />
+        )}
         {travels.length > 0 && (
-          <Travels travels={travels} onRemove={removeTravel} />
+          <Travels
+            travels={travels}
+            onRemove={removeTravel}
+            hide={hideTravels}
+            setHide={setHideTravels}
+            hideFlights={hideFlights}
+            setHideFlights={setHideFlights}
+          />
         )}
         <div className="mt-6 flex items-center justify-end gap-4">
           <Reset {...{ setCities, setTravels, setCountries }} />
