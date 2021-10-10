@@ -9,6 +9,9 @@ import {
   faBus,
   faCar,
   faAngleRight,
+  faEye,
+  faEyeSlash,
+  faPlaneSlash,
 } from "@fortawesome/free-solid-svg-icons";
 
 const TYPES = {
@@ -19,11 +22,34 @@ const TYPES = {
   car: faCar,
 };
 
-const Travels = ({ travels, onRemove }) => {
+const Travels = ({
+  travels,
+  onRemove,
+  hide,
+  setHide,
+  hideFlights,
+  setHideFlights,
+}) => {
   return (
     <>
-      <span className="text-xs font-medium mb-1 mt-2">
-        TRAVELS <span className="text-gray-400">({travels.length})</span>
+      <span className="text-xs font-medium mb-1 mt-2 flex items-center justify-between">
+        <span>
+          TRAVELS <span className="text-gray-400">({travels.length})</span>
+        </span>
+        <div className="flex items-center">
+          <div
+            onClick={() => setHideFlights(!hideFlights)}
+            className="mx-2 flex items-center justify-center rounded-full h-6 w-6 bg-gray-800 cursor-pointer hover:bg-gray-700"
+          >
+            <FontAwesomeIcon icon={!hideFlights ? faPlane : faPlaneSlash} />
+          </div>
+          <div
+            onClick={() => setHide(!hide)}
+            className="flex items-center justify-center rounded-full h-6 w-6 bg-gray-800 cursor-pointer hover:bg-gray-700"
+          >
+            <FontAwesomeIcon icon={!hide ? faEye : faEyeSlash} />
+          </div>
+        </div>
       </span>
       <div className="text-xs max-h-24 bg-gray-800 rounded-lg overflow-y-auto">
         {travels.map((t) => (
