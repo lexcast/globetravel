@@ -18,7 +18,7 @@ const Cities = ({ cities, onRemove, setHide, hide }) => {
         </div>
       </span>
       <div className="text-xs max-h-24 bg-gray-800 rounded-lg overflow-y-auto">
-        {cities.map((c) => (
+        {[...cities].reverse().map((c) => (
           <div
             key={c.geonameId}
             className="group px-3 py-2 flex items-center hover:bg-gray-700"
