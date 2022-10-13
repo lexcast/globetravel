@@ -52,7 +52,7 @@ const Travels = ({
         </div>
       </span>
       <div className="text-xs max-h-24 bg-gray-800 rounded-lg overflow-y-auto">
-        {travels.map((t) => (
+        {[...travels].reverse().map((t) => (
           <div
             key={t.id}
             className="group cursor-pointer px-3 py-2 flex items-center hover:bg-gray-700"
