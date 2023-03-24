@@ -4,7 +4,7 @@ import {
   getImageData,
   visibilityForCoordinate,
   polar2Cartesian,
-  ROTATION
+  ROTATION,
 } from "utils/globe";
 
 const Land = () => {
@@ -39,7 +39,7 @@ const Land = () => {
       <bufferGeometry attach="geometry">
         {dots.length && (
           <bufferAttribute
-            attachObject={["attributes", "position"]}
+            attach="attributes-position"
             count={dots.length / 3}
             array={dots}
             itemSize={3}

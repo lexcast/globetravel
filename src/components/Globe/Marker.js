@@ -21,11 +21,11 @@ const Marker = ({ city }) => {
   return (
     <mesh rotation={ROTATION}>
       <mesh>
-        <tubeBufferGeometry args={[curve, 44, 0.3, 8]} />
+        <tubeGeometry args={[curve, 44, 0.3, 8]} />
         <meshBasicMaterial color="#FCD34D" />
       </mesh>
       <mesh position={point}>
-        <sphereBufferGeometry args={[0.3, 5, 5]} />
+        <sphereGeometry args={[0.3, 5, 5]} />
         <meshBasicMaterial color="#FCD34D" />
       </mesh>
     </mesh>
