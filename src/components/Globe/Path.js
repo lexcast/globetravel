@@ -36,7 +36,7 @@ const Path = ({ travel }) => {
 
   return (
     <mesh rotation={ROTATION}>
-      <tubeBufferGeometry args={[curve, 44, 0.3, 8]} />
+      <tubeGeometry args={[curve, 44, 0.3, 8]} />
       <meshBasicMaterial color={TYPES[travel.type]} />
     </mesh>
   );

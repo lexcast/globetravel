@@ -26,7 +26,7 @@ const Curve = ({ travel }) => {
 
   return (
     <mesh rotation={ROTATION}>
-      <tubeBufferGeometry args={[curve, 44, 0.3, 8]} />
+      <tubeGeometry args={[curve, 44, 0.3, 8]} />
       <meshBasicMaterial color="#EF4444" />
     </mesh>
   );
