@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/globetravel/static/css/main.2908af60.css",
-    "main.js": "/globetravel/static/js/main.662ec2a0.js",
+    "main.css": "/globetravel/static/css/main.bd0a5769.css",
+    "main.js": "/globetravel/static/js/main.9f9d5736.js",
     "index.html": "/globetravel/index.html",
-    "main.2908af60.css.map": "/globetravel/static/css/main.2908af60.css.map",
-    "main.662ec2a0.js.map": "/globetravel/static/js/main.662ec2a0.js.map"
+    "main.bd0a5769.css.map": "/globetravel/static/css/main.bd0a5769.css.map",
+    "main.9f9d5736.js.map": "/globetravel/static/js/main.9f9d5736.js.map"
   },
   "entrypoints": [
-    "static/css/main.2908af60.css",
-    "static/js/main.662ec2a0.js"
+    "static/css/main.bd0a5769.css",
+    "static/js/main.9f9d5736.js"
   ]
 }
