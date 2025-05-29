@@ -1,13 +1,13 @@
 import React, { useMemo } from "react";
 import { CatmullRomCurve3 } from "three";
-import { RADIUS, toVector, ROTATION } from "utils/globe";
+import { RADIUS, toVector, ROTATION } from "../../utils/globe";
 import { geoInterpolate } from "d3";
 
 const TYPES = {
-  trail: "#10B981",
-  sail: "#06B6D4",
-  bus: "#F472B6",
-  car: "#F59E0B",
+  trail: "#34d399",
+  sail: "#3b82f6",
+  bus: "#f472b6",
+  car: "#fb923c",
 };
 
 const Path = ({ travel }) => {
@@ -36,7 +36,7 @@ const Path = ({ travel }) => {
 
   return (
     <mesh rotation={ROTATION}>
-      <tubeGeometry args={[curve, 44, 0.3, 8]} />
+      <tubeGeometry args={[curve, 44, 0.2, 8]} />
       <meshBasicMaterial color={TYPES[travel.type]} />
     </mesh>
   );

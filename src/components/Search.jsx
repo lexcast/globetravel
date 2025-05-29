@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { DebounceInput } from "react-debounce-input";
-import emoji, { SPECIAL_CODES } from "utils/emoji";
+import emoji, { SPECIAL_CODES } from "../utils/emoji";
 
 const Search = ({ onSelect }) => {
   const [search, setSearch] = useState("");

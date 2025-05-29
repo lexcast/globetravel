@@ -1,4 +1,5 @@
 import { Vector3 } from "three";
+import mapUrl from '../assets/map.png'
 
 const RADIUS = 80;
 
@@ -25,7 +26,7 @@ const loadMap = () =>
     const img = new Image();
     img.addEventListener("load", () => resolve(img));
     img.addEventListener("error", (err) => reject(err));
-    img.src = `${process.env.PUBLIC_URL}/images/map.png`;
+    img.src = mapUrl;
   });
 
 const polar2Cartesian = (lat, lng, rad = RADIUS, relAltitude = 0) => {

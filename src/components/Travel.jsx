@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Search from "./Search";
-import emoji from "utils/emoji";
+import emoji from "../utils/emoji";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShip,

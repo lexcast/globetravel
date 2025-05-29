@@ -5,7 +5,7 @@ import {
   visibilityForCoordinate,
   polar2Cartesian,
   ROTATION,
-} from "utils/globe";
+} from "../../utils/globe";
 
 const Land = () => {
   const [dots, setDots] = useState([]);
@@ -17,7 +17,7 @@ const Land = () => {
 
       const vertices = [];
       const D2R = Math.PI / 180;
-      const rows = 200;
+      const rows = 120;
       for (let lat = -90; lat <= 90; lat += 180 / rows) {
         const t = Math.cos(Math.abs(lat) * D2R) * 25 * Math.PI * 2 * 2;
         for (let r = 0; r < t; r++) {
@@ -46,7 +46,7 @@ const Land = () => {
           />
         )}
       </bufferGeometry>
-      <pointsMaterial size={1.5} color="#C7D2FE" />
+      <pointsMaterial size={1} color="#f4f4f5" />
     </points>
   );
 };

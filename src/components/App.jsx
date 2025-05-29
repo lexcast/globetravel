@@ -1,5 +1,5 @@
 import React from "react";
-import useLocalStorage from "hooks/useLocalStorage";
+import useLocalStorage from "../hooks/useLocalStorage";
 import Globe from "./Globe";
 import Menu from "./Menu";
 
@@ -15,8 +15,8 @@ const App = () => {
   );
 
   return (
-    <div className="text-gray-300 w-screen h-screen bg-gray-900 flex overflow-hidden flex-no-wrap">
-      <div className="h-screen w-full md:w-2/3 bg-gray-900">
+    <div className="text-gray-300 w-screen h-screen bg-gray-950 flex overflow-hidden flex-no-wrap">
+      <div className="h-screen w-full md:w-2/3 bg-gray-950">
         <Globe
           cities={cities}
           travels={travels}

@@ -1,5 +1,5 @@
 import React from "react";
-import emoji from "utils/emoji";
+import emoji from "../utils/emoji";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTimes,
@@ -65,7 +65,7 @@ const Travels = ({
               {["start", "end"].map((i) => (
                 <div key={i} className="flex items-center">
                   {t[i].countryCode && (
-                    <span className="mr-2 flex-shrink-0">
+                    <span className="mr-2 shrink-0">
                       {emoji(t[i].countryCode)}
                     </span>
                   )}

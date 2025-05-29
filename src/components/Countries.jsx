@@ -1,5 +1,5 @@
 import React from "react";
-import emoji from "utils/emoji";
+import emoji from "../utils/emoji";
 
 const Countries = ({ countries }) => {
   return (
