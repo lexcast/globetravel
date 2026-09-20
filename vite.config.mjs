@@ -6,7 +6,7 @@ import { resolve } from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
-    alias: [{ find: "@/*", replacement: resolve(__dirname, "./src/*") }]
+    alias: [{ find: "@/*", replacement: resolve(import.meta.dirname, "./src/*") }]
   },
   plugins: [
     react(),
