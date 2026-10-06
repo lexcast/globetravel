@@ -1,29 +1,43 @@
-import React from "react";
+import { lazy, Suspense, useMemo } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
-import Globe from "./Globe";
+import { deriveCountries } from "../utils/data";
 import Menu from "./Menu";
+
+const Globe = lazy(() => import("./Globe"));
 
 const App = () => {
   const [cities, setCities] = useLocalStorage("@globetravel.cities", []);
-  const [hideCities, setHideCities] = useLocalStorage(false);
   const [travels, setTravels] = useLocalStorage("@globetravel.travels", []);
-  const [hideTravels, setHideTravels] = useLocalStorage(false);
-  const [hideFlights, setHideFlights] = useLocalStorage(false);
-  const [countries, setCountries] = useLocalStorage(
-    "@globetravel.countries",
-    []
+  const [hideCities, setHideCities] = useLocalStorage(
+    "@globetravel.hideCities",
+    false
+  );
+  const [hideTravels, setHideTravels] = useLocalStorage(
+    "@globetravel.hideTravels",
+    false
+  );
+  const [hideFlights, setHideFlights] = useLocalStorage(
+    "@globetravel.hideFlights",
+    false
+  );
+
+  const countries = useMemo(
+    () => deriveCountries(cities, travels),
+    [cities, travels]
   );
 
   return (
     <div className="text-gray-300 w-screen h-screen bg-gray-950 flex overflow-hidden flex-no-wrap">
       <div className="h-screen w-full md:w-2/3 bg-gray-950">
-        <Globe
-          cities={cities}
-          travels={travels}
-          hideCities={hideCities}
-          hideTravels={hideTravels}
-          hideFlights={hideFlights}
-        />
+        <Suspense>
+          <Globe
+            cities={cities}
+            travels={travels}
+            hideCities={hideCities}
+            hideTravels={hideTravels}
+            hideFlights={hideFlights}
+          />
+        </Suspense>
       </div>
       <Menu
         {...{
@@ -32,7 +46,6 @@ const App = () => {
           travels,
           setTravels,
           countries,
-          setCountries,
           hideCities,
           setHideCities,
           hideTravels,

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { CatmullRomCurve3 } from "three";
 import { polar2Cartesian, RADIUS, toVector, ROTATION } from "../../utils/globe";
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   loadMap,
   getImageData,
@@ -36,14 +36,9 @@ const Land = () => {
 
   return (
     <points rotation={ROTATION}>
-      <bufferGeometry attach="geometry">
-        {dots.length && (
-          <bufferAttribute
-            attach="attributes-position"
-            count={dots.length / 3}
-            array={dots}
-            itemSize={3}
-          />
+      <bufferGeometry>
+        {dots.length > 0 && (
+          <bufferAttribute attach="attributes-position" args={[dots, 3]} />
         )}
       </bufferGeometry>
       <pointsMaterial size={1} color="#f4f4f5" />

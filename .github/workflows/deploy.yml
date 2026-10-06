@@ -10,8 +10,11 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
-        node-version: '18'
-    - run: npm install --force
+        node-version: '22'
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run lint
+    - run: npm test
     - run: npm run build
     - uses: peaceiris/actions-gh-pages@v4
       with:

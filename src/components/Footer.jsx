@@ -1,4 +1,3 @@
-import React from "react";
 import emoji from "../utils/emoji";
 
 const Footer = () => (

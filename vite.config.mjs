@@ -6,11 +6,14 @@ import { resolve } from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
-    alias: [{ find: "@/*", replacement: resolve(import.meta.dirname, "./src/*") }]
+    alias: { "@": resolve(import.meta.dirname, "src") }
   },
   plugins: [
     react(),
     tailwindcss(),
   ],
   base: '/globetravel/',
+  test: {
+    environment: 'jsdom',
+  },
 })

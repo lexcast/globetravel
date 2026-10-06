@@ -1,22 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Search from "./Search";
 import emoji from "../utils/emoji";
+import TRAVEL_TYPES from "../utils/travelTypes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faShip,
-  faPlane,
-  faTrain,
-  faBus,
-  faCar,
-} from "@fortawesome/free-solid-svg-icons";
-
-const TYPES = {
-  flight: faPlane,
-  trail: faTrain,
-  sail: faShip,
-  bus: faBus,
-  car: faCar,
-};
 
 const Travel = ({ onFinish }) => {
   const [type, setType] = useState();
@@ -26,14 +12,17 @@ const Travel = ({ onFinish }) => {
     <div className="flex flex-col justify-center">
       {!type && (
         <div className="flex items-center justify-around">
-          {Object.entries(TYPES).map(([k, icon]) => (
-            <div
+          {Object.entries(TRAVEL_TYPES).map(([k, { icon, label }]) => (
+            <button
+              type="button"
               key={k}
               onClick={() => setType(k)}
-              className="flex items-center justify-center rounded-full h-10 w-10 bg-gray-800 cursor-pointer hover:bg-gray-700"
+              aria-label={label}
+              title={label}
+              className="flex items-center justify-center rounded-full h-10 w-10 bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring"
             >
               <FontAwesomeIcon icon={icon} />
-            </div>
+            </button>
           ))}
         </div>
       )}
@@ -41,7 +30,7 @@ const Travel = ({ onFinish }) => {
         <>
           <div className="flex items-center mb-2">
             <div className="text-xs mr-2 flex items-center justify-center rounded-full h-6 w-6 bg-gray-800">
-              <FontAwesomeIcon icon={TYPES[type]} />
+              <FontAwesomeIcon icon={TRAVEL_TYPES[type].icon} />
             </div>
             From:
           </div>
@@ -52,7 +41,7 @@ const Travel = ({ onFinish }) => {
         <>
           <div className="flex items-center mb-2">
             <div className="mr-2 flex items-center justify-center rounded-full h-6 w-6 bg-gray-800">
-              <FontAwesomeIcon icon={TYPES[type]} />
+              <FontAwesomeIcon icon={TRAVEL_TYPES[type].icon} />
             </div>
             <div className="flex items-center mr-2">
               {start.countryCode && (

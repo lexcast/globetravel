@@ -1,14 +1,8 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { CatmullRomCurve3 } from "three";
 import { RADIUS, toVector, ROTATION } from "../../utils/globe";
 import { geoInterpolate } from "d3";
-
-const TYPES = {
-  trail: "#34d399",
-  sail: "#3b82f6",
-  bus: "#f472b6",
-  car: "#fb923c",
-};
+import TRAVEL_TYPES from "../../utils/travelTypes";
 
 const Path = ({ travel }) => {
   const curve = useMemo(() => {
@@ -37,7 +31,7 @@ const Path = ({ travel }) => {
   return (
     <mesh rotation={ROTATION}>
       <tubeGeometry args={[curve, 44, 0.2, 8]} />
-      <meshBasicMaterial color={TYPES[travel.type]} />
+      <meshBasicMaterial color={TRAVEL_TYPES[travel.type].color} />
     </mesh>
   );
 };

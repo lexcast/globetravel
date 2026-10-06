@@ -1,4 +1,3 @@
-import React from "react";
 import { RADIUS, ROTATION } from "../../utils/globe";
 
 const Earth = () => (

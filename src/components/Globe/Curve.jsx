@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { CubicBezierCurve3 } from "three";
 import { RADIUS, toVector, ROTATION } from "../../utils/globe";
 import { geoInterpolate } from "d3";
+import TRAVEL_TYPES from "../../utils/travelTypes";
 
 const Curve = ({ travel }) => {
   const curve = useMemo(() => {
@@ -27,7 +28,7 @@ const Curve = ({ travel }) => {
   return (
     <mesh rotation={ROTATION}>
       <tubeGeometry args={[curve, 44, 0.2, 8]} />
-      <meshBasicMaterial color="#dc2626" />
+      <meshBasicMaterial color={TRAVEL_TYPES.flight.color} />
     </mesh>
   );
 };

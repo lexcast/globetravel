@@ -1,5 +1,4 @@
-import React from "react";
-import { Canvas } from "react-three-fiber";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Earth from "./Earth";
 import Land from "./Land";

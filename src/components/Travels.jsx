@@ -1,26 +1,15 @@
-import React from "react";
 import emoji from "../utils/emoji";
+import TRAVEL_TYPES from "../utils/travelTypes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faTimes,
   faPlane,
-  faTrain,
-  faShip,
-  faBus,
-  faCar,
   faAngleRight,
   faEye,
   faEyeSlash,
   faPlaneSlash,
 } from "@fortawesome/free-solid-svg-icons";
-
-const TYPES = {
-  flight: faPlane,
-  trail: faTrain,
-  sail: faShip,
-  bus: faBus,
-  car: faCar,
-};
+import RemoveButton from "./RemoveButton";
+import ToggleButton from "./ToggleButton";
 
 const Travels = ({
   travels,
@@ -36,30 +25,31 @@ const Travels = ({
         <span>
           TRAVELS <span className="text-gray-400">({travels.length})</span>
         </span>
-        <div className="flex items-center">
-          <div
+        <div className="flex items-center gap-2">
+          <ToggleButton
+            label="Hide flights on the globe"
+            pressed={hideFlights}
             onClick={() => setHideFlights(!hideFlights)}
-            className="mx-2 flex items-center justify-center rounded-full h-6 w-6 bg-gray-800 cursor-pointer hover:bg-gray-700"
-          >
-            <FontAwesomeIcon icon={!hideFlights ? faPlane : faPlaneSlash} />
-          </div>
-          <div
+            icon={!hideFlights ? faPlane : faPlaneSlash}
+          />
+          <ToggleButton
+            label="Hide ground travels on the globe"
+            pressed={hide}
             onClick={() => setHide(!hide)}
-            className="flex items-center justify-center rounded-full h-6 w-6 bg-gray-800 cursor-pointer hover:bg-gray-700"
-          >
-            <FontAwesomeIcon icon={!hide ? faEye : faEyeSlash} />
-          </div>
+            icon={!hide ? faEye : faEyeSlash}
+          />
         </div>
       </span>
-      <div className="text-xs max-h-24 bg-gray-800 rounded-lg overflow-y-auto">
+      <ul className="text-xs max-h-24 bg-gray-800 rounded-lg overflow-y-auto">
         {[...travels].reverse().map((t) => (
-          <div
+          <li
             key={t.id}
-            className="group cursor-pointer px-3 py-2 flex items-center hover:bg-gray-700"
+            className="group px-3 py-1 min-h-8 flex items-center hover:bg-gray-700"
           >
             <FontAwesomeIcon
               className="text-xs mr-2 text-gray-400"
-              icon={TYPES[t.type]}
+              icon={TRAVEL_TYPES[t.type].icon}
+              title={TRAVEL_TYPES[t.type].label}
             />
             <div className="flex-1 flex items-center">
               {["start", "end"].map((i) => (
@@ -79,15 +69,13 @@ const Travels = ({
                 </div>
               ))}
             </div>
-            <span
+            <RemoveButton
+              label={`Remove travel ${t.start.name} to ${t.end.name}`}
               onClick={() => onRemove(t)}
-              className="group-hover:visible invisible text-xs"
-            >
-              <FontAwesomeIcon icon={faTimes} />
-            </span>
-          </div>
+            />
+          </li>
         ))}
-      </div>
+      </ul>
     </>
   );
 };

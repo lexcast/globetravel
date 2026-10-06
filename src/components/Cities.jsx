@@ -1,7 +1,7 @@
-import React from "react";
 import emoji from "../utils/emoji";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import RemoveButton from "./RemoveButton";
+import ToggleButton from "./ToggleButton";
 
 const Cities = ({ cities, onRemove, setHide, hide }) => {
   return (
@@ -10,32 +10,27 @@ const Cities = ({ cities, onRemove, setHide, hide }) => {
         <span>
           CITIES <span className="text-gray-400">({cities.length})</span>
         </span>
-        <div
+        <ToggleButton
+          label="Hide cities on the globe"
+          pressed={hide}
           onClick={() => setHide(!hide)}
-          className="flex items-center justify-center rounded-full h-6 w-6 bg-gray-800 cursor-pointer hover:bg-gray-700"
-        >
-          <FontAwesomeIcon icon={!hide ? faEye : faEyeSlash} />
-        </div>
+          icon={!hide ? faEye : faEyeSlash}
+        />
       </span>
-      <div className="text-xs max-h-24 bg-gray-800 rounded-lg overflow-y-auto">
+      <ul className="text-xs max-h-24 bg-gray-800 rounded-lg overflow-y-auto">
         {[...cities].reverse().map((c) => (
-          <div
+          <li
             key={c.geonameId}
-            className="group px-3 py-2 flex items-center hover:bg-gray-700"
+            className="group px-3 py-1 min-h-8 flex items-center hover:bg-gray-700"
           >
             {c.countryCode && (
               <span className="mr-2 shrink-0">{emoji(c.countryCode)}</span>
             )}
             <span className="flex-1">{c.name}</span>
-            <span
-              onClick={() => onRemove(c)}
-              className="cursor-pointer group-hover:visible invisible text-xs"
-            >
-              <FontAwesomeIcon icon={faTimes} />
-            </span>
-          </div>
+            <RemoveButton label={`Remove ${c.name}`} onClick={() => onRemove(c)} />
+          </li>
         ))}
-      </div>
+      </ul>
     </>
   );
 };

@@ -1,29 +1,34 @@
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { parseImport } from "../utils/data";
 
-const Import = ({ setCities, setTravels, setCountries }) => {
-  const handleFile = (e) => {
-    const fileReader = new FileReader();
-    fileReader.readAsText(e.target.files[0], "UTF-8");
+const Import = ({ setCities, setTravels }) => {
+  const handleFile = async (e) => {
+    const input = e.target;
+    const [file] = input.files;
+    // Reset so selecting the same file again still triggers onChange.
+    input.value = "";
+    if (!file) return;
 
-    fileReader.onload = (e) => {
-      const data = JSON.parse(e.target.result);
-      setCities(data.cities);
-      setTravels(data.travels);
-      setCountries(data.countries);
-    };
+    try {
+      const { cities, travels } = parseImport(await file.text());
+      setCities(cities);
+      setTravels(travels);
+    } catch (error) {
+      window.alert(`Could not import the file. ${error.message}`);
+    }
   };
 
   return (
     <label
       title="Import"
-      className="cursor-pointer flex items-center justify-center focus:outline-none focus:ring w-8 h-8 rounded bg-gray-800 hover:bg-gray-700"
+      className="cursor-pointer flex items-center justify-center focus-within:ring w-8 h-8 rounded bg-gray-800 hover:bg-gray-700"
     >
       <input
-        className="hidden"
+        className="sr-only"
         type="file"
-        accept="application/JSON"
+        aria-label="Import"
+        accept=".json,application/json"
         onChange={handleFile}
       />
       <FontAwesomeIcon icon={faUpload} />
