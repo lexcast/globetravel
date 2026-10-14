@@ -1,7 +1,9 @@
 import { lazy, Suspense, useMemo } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import useTheme from "../hooks/useTheme";
 import { deriveCountries } from "../utils/data";
 import Menu from "./Menu";
+import Brand from "./Brand";
 
 const Globe = lazy(() => import("./Globe"));
 
@@ -20,6 +22,7 @@ const App = () => {
     "@globetravel.hideFlights",
     false
   );
+  const [theme, setTheme] = useTheme();
 
   const countries = useMemo(
     () => deriveCountries(cities, travels),
@@ -27,8 +30,8 @@ const App = () => {
   );
 
   return (
-    <div className="text-gray-300 w-screen h-screen bg-gray-950 flex overflow-hidden flex-no-wrap">
-      <div className="h-screen w-full md:w-2/3 bg-gray-950">
+    <div className="relative h-dvh w-screen overflow-hidden bg-[radial-gradient(ellipse_at_35%_40%,#ffffff_0%,#e2e8f0_55%,#cbd5e1_100%)] dark:bg-[radial-gradient(ellipse_at_35%_40%,#0f1f3d_0%,#050b1a_55%,#020617_100%)]">
+      <div className="absolute inset-0 md:right-[432px]">
         <Suspense>
           <Globe
             cities={cities}
@@ -36,8 +39,12 @@ const App = () => {
             hideCities={hideCities}
             hideTravels={hideTravels}
             hideFlights={hideFlights}
+            theme={theme}
           />
         </Suspense>
+      </div>
+      <div className="pointer-events-none absolute top-4 left-4 md:hidden">
+        <Brand />
       </div>
       <Menu
         {...{
@@ -52,6 +59,8 @@ const App = () => {
           setHideTravels,
           hideFlights,
           setHideFlights,
+          theme,
+          setTheme,
         }}
       />
     </div>

@@ -7,7 +7,7 @@ const ToggleButton = ({ label, pressed, onClick, icon }) => (
     aria-label={label}
     aria-pressed={pressed}
     title={label}
-    className="flex items-center justify-center rounded-full h-6 w-6 bg-gray-800 hover:bg-gray-700 focus:outline-none focus-visible:ring"
+    className={"icon-button h-7 w-7 text-xs " + (pressed ? "opacity-50" : "")}
   >
     <FontAwesomeIcon icon={icon} />
   </button>

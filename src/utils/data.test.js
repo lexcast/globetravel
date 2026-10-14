@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { deriveCountries, hasTravel, parseImport, withUKFlag } from "./data";
+import {
+  deriveCountries,
+  hasTravel,
+  parseImport,
+  totalDistance,
+  withUKFlag,
+} from "./data";
 
 const city = (geonameId, countryCode) => ({
   geonameId,
@@ -94,5 +100,16 @@ describe("parseImport", () => {
         })
       )
     ).toThrow(/invalid travels/);
+  });
+});
+
+describe("totalDistance", () => {
+  it("sums great-circle distances in km, accepting string coordinates", () => {
+    const quito = { ...city(1, "EC"), lat: "0", lng: "-78" };
+    const halfway = { ...city(2, "EC"), lat: "0", lng: "12" };
+
+    // A quarter of the equator is ~10,008 km.
+    expect(totalDistance([travel("a", "flight", quito, halfway)])).toBe(10008);
+    expect(totalDistance([])).toBe(0);
   });
 });

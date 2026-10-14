@@ -1,35 +1,47 @@
-import { useMemo } from "react";
-import { CubicBezierCurve3 } from "three";
-import { RADIUS, toVector, ROTATION } from "../../utils/globe";
-import { geoInterpolate } from "d3";
+import { useMemo, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import { geoDistance } from "d3";
+import { RADIUS, greatCircleCurve, ROTATION } from "../../utils/globe";
 import TRAVEL_TYPES from "../../utils/travelTypes";
 
-const Curve = ({ travel }) => {
-  const curve = useMemo(() => {
-    const { start, end } = travel;
+const COLOR = TRAVEL_TYPES.flight.color;
 
-    const startXYZ = toVector(start.lat, start.lng, RADIUS);
-    const endXYZ = toVector(end.lat, end.lng, RADIUS);
+// Peak height grows with distance; sin(PI * t) lifts off and lands smoothly.
+const altitude = (t, angle) =>
+  0.4 + RADIUS * (0.04 + 0.3 * (angle / Math.PI)) * Math.sin(Math.PI * t);
 
-    const d3Interpolate = geoInterpolate(
-      [start.lng, start.lat],
-      [end.lng, end.lat]
+// Flight arc over the great circle, with a plane-dot flying along it.
+const Curve = ({ travel, colors }) => {
+  const dot = useRef();
+
+  const { curve, speed } = useMemo(() => {
+    const angle = geoDistance(
+      [Number(travel.start.lng), Number(travel.start.lat)],
+      [Number(travel.end.lng), Number(travel.end.lat)]
     );
-    const c1 = d3Interpolate(0.25);
-    const c2 = d3Interpolate(0.75);
 
-    const arcHeight = startXYZ.distanceTo(endXYZ) * 0.5 + RADIUS;
-    const controlXYZ1 = toVector(c1[1], c1[0], arcHeight);
-    const controlXYZ2 = toVector(c2[1], c2[0], arcHeight);
-
-    return new CubicBezierCurve3(startXYZ, controlXYZ1, controlXYZ2, endXYZ);
+    return {
+      curve: greatCircleCurve(travel.start, travel.end, altitude),
+      // Roughly constant speed regardless of the arc length.
+      speed: 0.12 / Math.max(angle, 0.3),
+    };
   }, [travel]);
 
+  useFrame(({ clock }) => {
+    dot.current.position.copy(curve.getPoint((clock.elapsedTime * speed) % 1));
+  });
+
   return (
-    <mesh rotation={ROTATION}>
-      <tubeGeometry args={[curve, 44, 0.2, 8]} />
-      <meshBasicMaterial color={TRAVEL_TYPES.flight.color} />
-    </mesh>
+    <group rotation={ROTATION}>
+      <mesh>
+        <tubeGeometry args={[curve, 128, 0.22, 8]} />
+        <meshBasicMaterial color={COLOR} transparent opacity={0.85} />
+      </mesh>
+      <mesh ref={dot}>
+        <sphereGeometry args={[0.7, 12, 12]} />
+        <meshBasicMaterial color={colors.flightDot} />
+      </mesh>
+    </group>
   );
 };
 

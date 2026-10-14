@@ -1,3 +1,4 @@
+import { geoDistance } from "d3";
 import { SPECIAL_CODES } from "./emoji";
 import TRAVEL_TYPES from "./travelTypes";
 
@@ -39,6 +40,23 @@ export const deriveCountries = (cities, travels) => {
 
   return Array.from(new Set(codes));
 };
+
+const EARTH_RADIUS_KM = 6371;
+
+// Great-circle distance covered by all travels, in kilometers.
+export const totalDistance = (travels) =>
+  Math.round(
+    travels.reduce(
+      (km, { start, end }) =>
+        km +
+        geoDistance(
+          [Number(start.lng), Number(start.lat)],
+          [Number(end.lng), Number(end.lat)]
+        ) *
+          EARTH_RADIUS_KM,
+      0
+    )
+  );
 
 // Adds the UK flag next to England/Scotland/Wales when it isn't there already.
 export const withUKFlag = (countries) => {

@@ -1,34 +1,49 @@
-import { useMemo } from "react";
-import { CatmullRomCurve3 } from "three";
-import { polar2Cartesian, RADIUS, toVector, ROTATION } from "../../utils/globe";
+import { useMemo, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import { Quaternion, Vector3 } from "three";
+import { RADIUS, ROTATION, toVector } from "../../utils/globe";
 
-const Marker = ({ city }) => {
-  const { lat, lng } = city;
+const HEIGHT = 4;
+const UP = new Vector3(0, 1, 0);
 
-  const curve = useMemo(() => {
-    const s = toVector(lat, lng, RADIUS);
-    const e = toVector(lat, lng, RADIUS + 5);
+// A pin standing on the surface, with a ring pulsing around its base.
+const Marker = ({ city, colors }) => {
+  const pulse = useRef();
+  const lat = Number(city.lat);
+  const lng = Number(city.lng);
 
-    return new CatmullRomCurve3([s, e]);
+  const { position, quaternion } = useMemo(() => {
+    const p = toVector(lat, lng, RADIUS);
+    const q = new Quaternion().setFromUnitVectors(UP, p.clone().normalize());
+    return { position: p, quaternion: q };
   }, [lat, lng]);
 
-  const point = useMemo(() => {
-    const p = polar2Cartesian(lat, lng, RADIUS + 5);
+  // Offset each pin's phase so they don't all pulse in sync.
+  const phase = useMemo(() => (Math.abs(lat * 7 + lng * 13) % 10) / 10, [lat, lng]);
 
-    return [p.x, p.y, p.z];
-  }, [lat, lng]);
+  useFrame(({ clock }) => {
+    const t = (clock.elapsedTime * 0.6 + phase) % 1;
+    pulse.current.scale.setScalar(1 + t * 2.5);
+    pulse.current.material.opacity = 0.6 * (1 - t);
+  });
 
   return (
-    <mesh rotation={ROTATION}>
-      <mesh>
-        <tubeGeometry args={[curve, 44, 0.2, 8]} />
-        <meshBasicMaterial color="#fcd34d" />
-      </mesh>
-      <mesh position={point}>
-        <sphereGeometry args={[0.5, 5, 5]} />
-        <meshBasicMaterial color="#ef4444" />
-      </mesh>
-    </mesh>
+    <group rotation={ROTATION}>
+      <group position={position} quaternion={quaternion}>
+        <mesh ref={pulse} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.2, 0]}>
+          <ringGeometry args={[0.7, 1, 32]} />
+          <meshBasicMaterial color={colors.marker} transparent depthWrite={false} />
+        </mesh>
+        <mesh position={[0, HEIGHT / 2, 0]}>
+          <cylinderGeometry args={[0.12, 0.12, HEIGHT, 6]} />
+          <meshBasicMaterial color={colors.marker} />
+        </mesh>
+        <mesh position={[0, HEIGHT, 0]}>
+          <sphereGeometry args={[0.8, 16, 16]} />
+          <meshBasicMaterial color={colors.marker} />
+        </mesh>
+      </group>
+    </group>
   );
 };
 

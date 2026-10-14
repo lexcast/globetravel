@@ -9,6 +9,17 @@
       name="description"
       content="3D Earth Globe to display your travels"
     />
+    <script>
+      // Apply the saved theme before first paint to avoid a flash (see useTheme).
+      try {
+        const saved = JSON.parse(localStorage.getItem("@globetravel.theme"));
+        const theme =
+          saved ||
+          (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.classList.toggle("dark", theme === "dark");
+        document.documentElement.style.colorScheme = theme;
+      } catch {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

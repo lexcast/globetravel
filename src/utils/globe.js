@@ -1,4 +1,5 @@
-import { Vector3 } from "three";
+import { CatmullRomCurve3, Vector3 } from "three";
+import { geoDistance, geoInterpolate } from "d3";
 import mapUrl from '../assets/map.png'
 
 const RADIUS = 80;
@@ -45,6 +46,28 @@ const toVector = (lat, lng, rad, relAltitude = 0) => {
   return new Vector3(c.x, c.y, c.z);
 };
 
+// Sample spacing along the great circle; small enough that the straight
+// segments between samples never cut below the surface.
+const STEP = (2 * Math.PI) / 180;
+
+// Curve following the great circle between two places, at a height above the
+// surface given by `altitude(t)` for t in [0, 1].
+const greatCircleCurve = (start, end, altitude) => {
+  const from = [Number(start.lng), Number(start.lat)];
+  const to = [Number(end.lng), Number(end.lat)];
+  const angle = geoDistance(from, to);
+  const interpolate = geoInterpolate(from, to);
+  const segments = Math.max(2, Math.ceil(angle / STEP));
+
+  const points = Array.from({ length: segments + 1 }, (_, i) => {
+    const t = i / segments;
+    const [lng, lat] = interpolate(t);
+    return toVector(lat, lng, RADIUS + altitude(t, angle));
+  });
+
+  return new CatmullRomCurve3(points);
+};
+
 const date = new Date();
 const timeZoneOffset = date.getTimezoneOffset() || 0;
 const timeZoneMaxOffset = 60 * 12;
@@ -57,5 +80,6 @@ export {
   loadMap,
   polar2Cartesian,
   toVector,
+  greatCircleCurve,
   ROTATION,
 };

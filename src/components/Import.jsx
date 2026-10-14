@@ -22,7 +22,7 @@ const Import = ({ setCities, setTravels }) => {
   return (
     <label
       title="Import"
-      className="cursor-pointer flex items-center justify-center focus-within:ring w-8 h-8 rounded bg-gray-800 hover:bg-gray-700"
+      className="cursor-pointer icon-button h-9 w-9 focus-within:ring-2 focus-within:ring-sky-500"
     >
       <input
         className="sr-only"

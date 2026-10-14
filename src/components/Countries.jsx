@@ -2,9 +2,11 @@ import emoji from "../utils/emoji";
 import { withUKFlag } from "../utils/data";
 
 const Countries = ({ countries }) => (
-  <div className="flex flex-wrap mb-6">
+  <div className="flex flex-wrap gap-x-2 gap-y-1 text-xl">
     {withUKFlag(countries).map((c) => (
-      <div key={c}>{emoji(c)}</div>
+      <span key={c} title={c}>
+        {emoji(c)}
+      </span>
     ))}
   </div>
 );

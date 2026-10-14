@@ -8,7 +8,7 @@ const RemoveButton = ({ label, onClick }) => (
     onClick={onClick}
     aria-label={label}
     title={label}
-    className="ml-2 shrink-0 flex items-center justify-center h-6 w-6 rounded-full text-xs hover:bg-gray-600 focus:outline-none focus-visible:ring pointer-fine:opacity-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-within:opacity-100"
+    className="icon-button ml-2 h-7 w-7 shrink-0 text-xs hover:text-red-500 pointer-fine:opacity-0 pointer-fine:group-focus-within:opacity-100 pointer-fine:group-hover:opacity-100 dark:hover:text-red-400"
   >
     <FontAwesomeIcon icon={faTimes} />
   </button>

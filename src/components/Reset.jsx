@@ -15,7 +15,7 @@ const Reset = ({ setCities, setTravels }) => {
       onClick={handleReset}
       title="Reset"
       aria-label="Reset"
-      className="flex items-center justify-center focus:outline-none focus:ring w-8 h-8 rounded bg-gray-800 hover:bg-gray-700"
+      className="icon-button h-9 w-9 hover:text-red-500 dark:hover:text-red-400"
     >
       <FontAwesomeIcon icon={faTrash} />
     </button>

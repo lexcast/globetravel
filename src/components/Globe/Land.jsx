@@ -7,7 +7,7 @@ import {
   ROTATION,
 } from "../../utils/globe";
 
-const Land = () => {
+const Land = ({ colors }) => {
   const [dots, setDots] = useState([]);
 
   useEffect(() => {
@@ -41,7 +41,14 @@ const Land = () => {
           <bufferAttribute attach="attributes-position" args={[dots, 3]} />
         )}
       </bufferGeometry>
-      <pointsMaterial size={1} color="#f4f4f5" />
+      <pointsMaterial
+        size={1.6}
+        sizeAttenuation={false}
+        color={colors.land}
+        transparent
+        opacity={colors.landOpacity}
+        depthWrite={false}
+      />
     </points>
   );
 };
