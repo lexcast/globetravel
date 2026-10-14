@@ -9,8 +9,19 @@
       name="description"
       content="3D Earth Globe to display your travels"
     />
-    <script type="module" crossorigin src="/globetravel/assets/index-BpaERJ71.js"></script>
-    <link rel="stylesheet" crossorigin href="/globetravel/assets/index-D41Bashf.css">
+    <script>
+      // Apply the saved theme before first paint to avoid a flash (see useTheme).
+      try {
+        const saved = JSON.parse(localStorage.getItem("@globetravel.theme"));
+        const theme =
+          saved ||
+          (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.classList.toggle("dark", theme === "dark");
+        document.documentElement.style.colorScheme = theme;
+      } catch {}
+    </script>
+    <script type="module" crossorigin src="/globetravel/assets/index-B_CQu7qe.js"></script>
+    <link rel="stylesheet" crossorigin href="/globetravel/assets/index-Dr7K_cBM.css">
   </head>
   <body>
     <div id="root"></div>
