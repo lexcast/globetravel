@@ -1,0 +1,28 @@
+schema = 1
+name = "Globetravel"
+
+[runtime]
+kind = "node"
+version = "24"
+package_manager = "npm"
+
+[[setup.steps]]
+kind = "dependencies"
+locked = true
+
+[[setup.steps]]
+run = ["npm", "run", "build"]
+
+[launch]
+command = ["npm", "run", "preview", "--", "--host", "{host}", "--port", "{port}", "--strictPort"]
+host = "127.0.0.1"
+port = 3000
+
+[health]
+type = "http"
+path = "/globetravel/"
+timeout_seconds = 90
+
+# Browser storage belongs to the browser profile and origin, outside this checkout.
+[persistence]
+paths = []
